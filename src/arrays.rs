@@ -75,3 +75,24 @@ pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
 
     return (nums.len() - count) as i32; // Return the length of the vector after removing duplicates
 }
+
+///
+/// # See
+/// https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+///
+pub fn remove_duplicates_2(nums: &mut Vec<i32>) -> i32 {
+    let mut current_counter: i32 = 1;
+    let mut current_index : usize = 0;
+    for i in 1..nums.len() {
+        if nums[current_index] == nums[i] && current_counter <2{
+            current_index+=1;
+            current_counter +=1;
+            nums[current_index] = nums[i];
+        }else if(nums[current_index] !=   nums[i]){
+            current_counter = 1;
+            current_index+=1;
+            nums[current_index] = nums[i];
+        }
+    }
+    return (current_index+1) as i32;
+}
