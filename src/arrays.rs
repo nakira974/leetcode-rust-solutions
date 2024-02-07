@@ -55,3 +55,19 @@ pub fn merge(nums1: &mut [i32], m: i32, nums2: &[i32], n: i32) {
     nums1[..mSize + nSize].copy_from_slice(&res[..mSize + nSize]);
     res.clear();
 }
+
+pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+    let mut count: usize = 0; // Variable to keep track of the count of duplicate elements
+    let mut current_element = nums[0]; // Variable to store the current element being compared
+
+    for i in 1..nums.len() { // Loop through the vector starting from the second element
+        if current_element == nums[i] { // If the current element is equal to the previous element
+            count += 1; // Increment the count of duplicates
+        } else {
+            nums[i - count] = nums[i]; // Move the non-duplicate element to its correct position
+            current_element = nums[i]; // Update the current element being compared
+        }
+    }
+
+    return (nums.len() - count) as i32; // Return the length of the vector after removing duplicates
+}
