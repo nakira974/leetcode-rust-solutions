@@ -56,6 +56,10 @@ pub fn merge(nums1: &mut [i32], m: i32, nums2: &[i32], n: i32) {
     res.clear();
 }
 
+///
+/// # See
+/// https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+///
 pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
     let mut count: usize = 0; // Variable to keep track of the count of duplicate elements
     let mut current_element = nums[0]; // Variable to store the current element being compared
