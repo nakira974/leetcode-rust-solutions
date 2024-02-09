@@ -123,3 +123,34 @@ pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
 
     result
 }
+///
+/// # See
+/// https://leetcode.com/problems/candy
+///
+pub fn candy(ratings: Vec<i32>) -> i32 {
+    let n: usize = ratings.len();
+    if n == 1 {
+        return 1;
+    }
+    let mut candies: Vec<i32> = Vec::with_capacity(n);
+
+    for _ in 0..n {
+        candies.push(1);
+    }
+
+    for i in 1..n {
+        if ratings[i] > ratings[i - 1] {
+            candies[i] = candies[i - 1] + 1;
+        }
+    }
+
+    let mut result: i32 = candies[n - 1];
+    for i in (0..n - 1).rev() {
+        if ratings[i] > ratings[i + 1] {
+            candies[i] = std::cmp::max(candies[i], candies[i + 1] + 1);
+        }
+        result += candies[i];
+    }
+
+    return result;
+}
