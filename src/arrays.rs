@@ -96,3 +96,30 @@ pub fn remove_duplicates_2(nums: &mut Vec<i32>) -> i32 {
     }
     return (current_index+1) as i32;
 }
+
+///
+/// # See
+/// https://leetcode.com/problems/product-of-array-except-self
+///
+pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
+    let n: usize = nums.len();
+    let mut left_pre_sums = Vec::with_capacity(n);
+    left_pre_sums.push(1);
+
+    for i in 1..n {
+        left_pre_sums.push(left_pre_sums[i - 1] * nums[i - 1]);
+    }
+
+    let mut right_pre_sums = Vec::with_capacity(n);
+    right_pre_sums.push(1);
+    for i in (0..n - 1).rev() {
+        right_pre_sums.insert(0, right_pre_sums[0] * nums[i + 1]);
+    }
+
+    let mut result = Vec::with_capacity(n);
+    for i in 0..n {
+        result.push(left_pre_sums[i] * right_pre_sums[i]);
+    }
+
+    result
+}
